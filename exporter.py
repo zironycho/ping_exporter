@@ -75,6 +75,9 @@ if __name__ == '__main__':
     start_http_server(cli.port)
     while True:
         logger.info('Scrapping target %s', cli.target)
-        metrics(icmp_gauge=icmp_gauge, icmp_code_gauge=icmp_code_gauge,
-                tcp_gauge=tcp_gauge)
+        try:
+            metrics(icmp_gauge=icmp_gauge, icmp_code_gauge=icmp_code_gauge,
+                    tcp_gauge=tcp_gauge)
+        except Exception as e:
+            print(e)
         time.sleep(cli.frequency)
